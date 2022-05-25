@@ -1,16 +1,59 @@
-const axios = require("axios");
+let results = null;
 
-const options = {
-  method: 'GET',
-  url: 'https://edamam-recipe-search.p.rapidapi.com/search',
-  headers: {
-    'X-RapidAPI-Host': 'edamam-recipe-search.p.rapidapi.com',
-    'X-RapidAPI-Key': 'c662858380mshdd89ec9a90bbb92p1cf8b3jsn52fb7dde3e66'
+async function getRecipe() {
+  let url = "https://www.themealdb.com/api/json/v1/1/random.php";
+  let response = await fetch(url);
+  //check to see if the fetch was successful
+  if (response.ok) {
+    // the API will send us JSON...but we have to convert the response before we can use it
+    // .json() also returns a promise...so we await it as well.
+    let data = await response.json();
+    displayRecipe(data);
   }
 };
 
-axios.request(options).then(function (response) {
-	console.log(response.data);
-}).catch(function (error) {
-	console.error(error);
-});
+const reset = () => {
+  document.querySelector("#output").innerHTML = "";
+};
+
+function displayRecipe(data) {
+  reset();
+  const outputElement = document.querySelector("#output");
+  results = data;
+  const html = `<h2>${results.meals[0].strMeal}</h2>
+                <div id="grid">                 
+                  <img src="${results.meals[0].strMealThumb}" alt="Image of ${results.meals[0].strMeal}">
+                  <ui>
+                    <h3>Ingredients:</h3>
+                    <li>${results.meals[0].strMeasure1} ${results.meals[0].strIngredient1}</li>
+                    <li>${results.meals[0].strMeasure2} ${results.meals[0].strIngredient2}</li>
+                    <li>${results.meals[0].strMeasure3} ${results.meals[0].strIngredient3}</li>
+                    <li>${results.meals[0].strMeasure4} ${results.meals[0].strIngredient4}</li>
+                    <li>${results.meals[0].strMeasure5} ${results.meals[0].strIngredient5}</li>
+                    <li>${results.meals[0].strMeasure6} ${results.meals[0].strIngredient6}</li>
+                    <li>${results.meals[0].strMeasure7} ${results.meals[0].strIngredient7}</li>
+                    <li>${results.meals[0].strMeasure8} ${results.meals[0].strIngredient8}</li>
+                    <li>${results.meals[0].strMeasure9} ${results.meals[0].strIngredient9}</li>
+                    <li>${results.meals[0].strMeasure10} ${results.meals[0].strIngredient10}</li>
+                    <li>${results.meals[0].strMeasure11} ${results.meals[0].strIngredient11}</li>
+                    <li>${results.meals[0].strMeasure12} ${results.meals[0].strIngredient12}</li>
+                    <li>${results.meals[0].strMeasure13} ${results.meals[0].strIngredient13}</li>
+                    <li>${results.meals[0].strMeasure14} ${results.meals[0].strIngredient14}</li>
+                    <li>${results.meals[0].strMeasure15} ${results.meals[0].strIngredient15}</li>
+                    <li>${results.meals[0].strMeasure16} ${results.meals[0].strIngredient16}</li>
+                    <li>${results.meals[0].strMeasure17} ${results.meals[0].strIngredient17}</li>
+                    <li>${results.meals[0].strMeasure18} ${results.meals[0].strIngredient18}</li>
+                    <li>${results.meals[0].strMeasure19} ${results.meals[0].strIngredient19}</li>
+                    <li>${results.meals[0].strMeasure20} ${results.meals[0].strIngredient20}</li>
+                  </ui>
+                </div>
+                <h3>Instructions:</h3>
+                <p>${results.meals[0].strInstructions}</p>`;
+  outputElement.innerHTML = html;
+  console.log("first: ", results);
+};
+
+document.querySelector('#generateButton').addEventListener('click', getRecipe);
+
+const currentDate = new Date();
+document.querySelector('#year').textContent = currentDate.getFullYear();

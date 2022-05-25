@@ -9,27 +9,14 @@
 </head>
 <body>
     <header>
-        <h1>Recipe Book</h1>
+        <h1>Random Meal Generator</h1>
     </header>
     <main>
-        <h3>Search up recipes by meal name, ingredients, or diet.</h2>
-        <p>
-            Filter by: 
-            <select id="sortBy">
-                <option value="mealName">Meal Name</option>
-                <option value="ingredients">Ingredients</option>
-                <option value="diets">Diet</option>
-            </select>
-        </p>
-        <div id="searchBar">
-            <input type="text" id="searchBar">
-            <input type="button" id="searchButton" value="Search">
+        <h3 id="description">Stuck in a dinner rut? Discover new recipes with this meal generator.</h3>
+        <div id="generate">
+            <input type="button" id="generateButton" value="Find Recipe">
         </div>
-        <div>
-            <p>
-                Results: <span id="results"></span>
-            </p>
-        </div>
+        <div id="output"></div>
     </main>
     <footer>
         &copy;<span id="year"></span> Jenna Scholl

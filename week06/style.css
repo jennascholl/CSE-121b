@@ -1,0 +1,63 @@
+main {
+    background-color: beige;
+    margin: 0;
+    min-height: 550px;
+}
+header {
+    padding: 30px;
+    background-color: olive;
+    margin: 0;
+}
+#output {
+    padding-bottom: 25px;
+}
+footer {
+    align-self: bottom;
+    background-color: olive;
+    margin: 0;
+    padding: 25px;
+}
+h2 {
+    text-align: center;
+    font-size: 50px;
+}
+#description {
+    text-align: center;
+}
+h1, #generate {
+    text-align: center;
+    margin: 0;
+}
+h3, #generate {
+    padding: 10px;
+}
+#generateButton {
+    size: 25px;
+    background-color: olive;
+    color: beige; 
+}
+#grid {
+    display: grid;
+    grid-template-columns: 35% 65%;
+    height: 450px;
+}
+img {
+    max-height: 450px;
+    grid-column: 2;
+}
+#ingredients {
+    font-size: 36;
+}
+ui {
+    grid-column: 1;
+    grid-row: 1;
+    font-size: 20px;
+    height: 500px;
+    content-visibility: auto;
+    list-style-type: none;
+    padding-left: 50px;
+}
+p {
+    font-size: 18px;
+    max-height: 500px;
+}
