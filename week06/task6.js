@@ -1,25 +1,22 @@
 let results = null;
 
+//get random recipe from API
 async function getRecipe() {
   let url = "https://www.themealdb.com/api/json/v1/1/random.php";
   let response = await fetch(url);
   //check to see if the fetch was successful
   if (response.ok) {
-    // the API will send us JSON...but we have to convert the response before we can use it
-    // .json() also returns a promise...so we await it as well.
+    // convert response
     let data = await response.json();
     displayRecipe(data);
   }
 };
 
-const reset = () => {
-  document.querySelector("#output").innerHTML = "";
-};
-
+//put data from API on the page
 function displayRecipe(data) {
-  reset();
   const outputElement = document.querySelector("#output");
   results = data;
+  //for some reason the ingredients are not in an array on the API so I couldn't use a loop here
   const html = `<h2>${results.meals[0].strMeal}</h2>
                 <div id="grid">                 
                   <img src="${results.meals[0].strMealThumb}" alt="Image of ${results.meals[0].strMeal}">
@@ -50,10 +47,13 @@ function displayRecipe(data) {
                 <h3>Instructions:</h3>
                 <p>${results.meals[0].strInstructions}</p>`;
   outputElement.innerHTML = html;
+  //logs data in the console, this was helpful to me while writing the program
   console.log("first: ", results);
 };
 
+//run function getRecipe when the generate button is clicked
 document.querySelector('#generateButton').addEventListener('click', getRecipe);
 
+//gets current year for copyright in the footer
 const currentDate = new Date();
 document.querySelector('#year').textContent = currentDate.getFullYear();
